@@ -29,7 +29,7 @@ namespace NeonSkySurvivor
 
         private void FixedUpdate()
         {
-            body.velocity = Vector2.down * fallSpeed;
+            body.linearVelocity = Vector2.down * fallSpeed;
         }
 
         private void OnTriggerEnter2D(Collider2D other)

@@ -85,7 +85,7 @@ namespace NeonSkySurvivor
                 return;
             }
 
-            body.velocity = moveInput * moveSpeed;
+            body.linearVelocity = moveInput * moveSpeed;
             ClampToCamera();
         }
 
@@ -99,7 +99,7 @@ namespace NeonSkySurvivor
             nextFireTime = 0f;
             nextPulseTime = 0f;
             transform.position = new Vector3(0f, -3.5f, 0f);
-            body.velocity = Vector2.zero;
+            body.linearVelocity = Vector2.zero;
             gameObject.SetActive(true);
             visualAnimator.SetDead(false);
         }
@@ -167,12 +167,12 @@ namespace NeonSkySurvivor
             while (timer < dashDuration)
             {
                 timer += Time.deltaTime;
-                body.velocity = direction * dashSpeed;
+                body.linearVelocity = direction * dashSpeed;
                 ClampToCamera();
                 yield return new WaitForFixedUpdate();
             }
 
-            body.velocity = Vector2.zero;
+            body.linearVelocity = Vector2.zero;
             visualAnimator.SetDashing(false);
             invulnerable = false;
             dashing = false;
@@ -222,7 +222,7 @@ namespace NeonSkySurvivor
         {
             dead = true;
             invulnerable = true;
-            body.velocity = Vector2.zero;
+            body.linearVelocity = Vector2.zero;
             visualAnimator.SetDead(true);
             if (cameraEffects != null) cameraEffects.Shake(0.28f, 0.45f);
             yield return new WaitForSeconds(0.45f);
@@ -232,7 +232,7 @@ namespace NeonSkySurvivor
         private IEnumerator DamageRoutine()
         {
             invulnerable = true;
-            body.velocity = Vector2.zero;
+            body.linearVelocity = Vector2.zero;
             visualAnimator.PlayDamageFeedback(damageInvulnerabilitySeconds);
             if (cameraEffects != null) cameraEffects.Shake(0.18f, 0.24f);
             yield return new WaitForSeconds(damageInvulnerabilitySeconds);

@@ -19,7 +19,7 @@ namespace NeonSkySurvivor
 
         public void Initialize(Vector2 direction)
         {
-            body.velocity = direction.normalized * speed;
+            body.linearVelocity = direction.normalized * speed;
         }
 
         private void OnTriggerEnter2D(Collider2D other)

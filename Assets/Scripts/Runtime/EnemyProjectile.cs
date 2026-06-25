@@ -18,7 +18,7 @@ namespace NeonSkySurvivor
 
         public void Initialize(Vector2 direction, float speedMultiplier)
         {
-            body.velocity = direction.normalized * speed * Mathf.Max(0.1f, speedMultiplier);
+            body.linearVelocity = direction.normalized * speed * Mathf.Max(0.1f, speedMultiplier);
         }
 
         private void OnTriggerEnter2D(Collider2D other)

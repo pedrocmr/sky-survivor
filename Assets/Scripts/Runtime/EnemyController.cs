@@ -71,7 +71,7 @@ namespace NeonSkySurvivor
         {
             if (GameManager.Instance == null || !GameManager.Instance.IsPlaying || dying)
             {
-                body.velocity = Vector2.zero;
+                body.linearVelocity = Vector2.zero;
                 return;
             }
 
@@ -85,7 +85,7 @@ namespace NeonSkySurvivor
 
             if (player != null)
             {
-                Vector2 predictedVelocity = playerBody != null ? playerBody.velocity : Vector2.zero;
+                Vector2 predictedVelocity = playerBody != null ? playerBody.linearVelocity : Vector2.zero;
                 Vector2 predictedPosition = (Vector2)player.position + predictedVelocity * PredictionTime;
                 Vector2 toPlayer = (predictedPosition - body.position).normalized;
                 desired = Vector2.Lerp(Vector2.down, toPlayer, 0.45f).normalized;
@@ -94,8 +94,8 @@ namespace NeonSkySurvivor
             float wave = Mathf.Sin(Time.time * WaveFrequency + phase) * HorizontalWave;
             desired.x += wave;
             Vector2 targetVelocity = desired.normalized * BaseSpeed * Mathf.Lerp(1f, difficulty, 0.55f);
-            body.velocity = Vector2.Lerp(body.velocity, targetVelocity, SteeringStrength * Time.fixedDeltaTime);
-            visualAnimator.SetVelocity(body.velocity);
+            body.linearVelocity = Vector2.Lerp(body.linearVelocity, targetVelocity, SteeringStrength * Time.fixedDeltaTime);
+            visualAnimator.SetVelocity(body.linearVelocity);
 
             if (Time.time >= nextShotTime && player != null)
             {
@@ -129,7 +129,7 @@ namespace NeonSkySurvivor
         private void Die(bool fromPulse)
         {
             dying = true;
-            body.velocity = Vector2.zero;
+            body.linearVelocity = Vector2.zero;
             GameManager.Instance.RegisterEnemyDefeated(fromPulse ? ScoreReward / 2 : ScoreReward, EnergyReward);
 
             if (!fromPulse && pickupPrefab != null && Random.value <= PickupChance)

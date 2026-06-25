@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 781f371741dec2f41bfa01bfb3e1e2dc, type: 3}
+  m_Name: Sniper
+  m_EditorClassIdentifier: Assembly-CSharp::NeonSkySurvivor.EnemyVariantConfig
+  displayName: Sniper
+  maxHealth: 2
+  baseSpeed: 1.55
+  scoreReward: 170
+  energyReward: 9
+  pickupChance: 0.26
+  escapedEnergyPenalty: 12
+  predictionTime: 0.82
+  steeringStrength: 1.75
+  horizontalWave: 0.2
+  waveFrequency: 1.9
+  minShotInterval: 1.45
+  maxShotInterval: 2.55
+  projectileSpeedMultiplier: 1.2

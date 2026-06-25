@@ -76,6 +76,12 @@ namespace NeonSkySurvivorEditor
             PlayerController playerPrefab = CreatePlayerPrefab(playerSprite, ringSprite, playerProjectilePrefab);
 
             Scene scene = EditorSceneManager.NewScene(NewSceneSetup.EmptyScene, NewSceneMode.Single);
+            playerPrefab = LoadPrefabComponent<PlayerController>($"{PrefabFolder}/Player.prefab");
+            for (int i = 0; i < enemyDefinitions.Length; i++)
+            {
+                enemyPrefabs[i] = LoadPrefabComponent<EnemyController>($"{PrefabFolder}/Enemy{enemyDefinitions[i].Name}.prefab");
+            }
+
             Camera mainCamera = CreateCamera();
             CreateTilemapBackground(tileSprite);
             CreateStarfield(starSprite);
@@ -508,6 +514,17 @@ namespace NeonSkySurvivorEditor
             GameObject prefab = PrefabUtility.SaveAsPrefabAsset(root, path);
             UnityEngine.Object.DestroyImmediate(root);
             return prefab;
+        }
+
+        private static T LoadPrefabComponent<T>(string path) where T : Component
+        {
+            T component = AssetDatabase.LoadAssetAtPath<T>(path);
+            if (component == null)
+            {
+                throw new InvalidOperationException($"Nao foi possivel carregar o prefab em {path}.");
+            }
+
+            return component;
         }
 
         private static Camera CreateCamera()
